@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and health preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "caloriesTarget": { "type": "number" },
+        "budgetTarget": { "type": "number" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Recipe": {
+      "title": "Recipe",
+      "description": "Meal recipe details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "calories": { "type": "number" },
+        "category": { "type": "string", "enum": ["Budget Meal", "Regular", "Premium"] },
+        "image": { "type": "string" },
+        "ingredients": { "type": "array", "items": { "type": "string" } },
+        "instructions": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "title", "price", "category"]
+    },
+    "HistoryItem": {
+      "title": "HistoryItem",
+      "description": "Record of a viewed recipe",
+      "type": "object",
+      "properties": {
+        "recipeId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "priceAtView": { "type": "number" }
+      },
+      "required": ["recipeId", "timestamp", "priceAtView"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/users/{uid}/history/{historyId}": {
+      "schema": "HistoryItem",
+      "description": "User's recipe viewing history"
+    },
+    "/recipes/{recipeId}": {
+      "schema": "Recipe",
+      "description": "Global recipe database"
+    }
+  }
+}

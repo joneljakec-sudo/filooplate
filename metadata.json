@@ -1,0 +1,5 @@
+{
+  "name": "FiloPlate",
+  "description": "Filipino meal planner with budget-based recipe categorization and nutrition tracking.",
+  "requestFramePermissions": []
+}
